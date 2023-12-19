@@ -1,4 +1,4 @@
-package com.lsh;
+package com.lsh.flink.wordcount;
 
 import org.apache.flink.api.common.functions.FlatMapFunction;
 import org.apache.flink.api.java.functions.KeySelector;
@@ -8,17 +8,19 @@ import org.apache.flink.streaming.api.datastream.KeyedStream;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.util.Collector;
-import org.junit.jupiter.api.Test;
 
-public class FlinkStreamAPITest {
+/**
+ * BUG1:java.lang.NoClassDefFoundError: org/apache/flink/streaming/api/scala/StreamExecutionEnvironment
+ * removing the <scope>provided</scope> which was present in the maven import.
+ */
+public class WordCountStreamDemo {
 
     /**
      * Java17 java.lang.reflect.InaccessibleObjectException: Unable to make field private final byte[] java.lang.String.value accessible: module java.base does not "opens java.lang" to unnamed module @2a5ca609
      * use Java 11
      * @throws Exception
      */
-    @Test
-    void streamAPITest() throws Exception {
+    public static void main(String[] args) throws Exception{
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
 
         DataStreamSource<String> stringDataStreamSource = env.readTextFile("hello.txt");
@@ -43,5 +45,13 @@ public class FlinkStreamAPITest {
         SingleOutputStreamOperator<Tuple2<String, Integer>> result = tuple2StringKeyedStream.sum(1);
         result.print();
         env.execute();
+        /**
+         * 3> (hello,1)
+         * 3> (hello,2)
+         * 3> (hello,3)
+         * 5> (world,1)
+         * 7> (flink,1)
+         * 2> (java,1)
+         */
     }
 }

@@ -1,28 +1,20 @@
-package com.lsh;
+package com.lsh.flink.wordcount;
 
 import org.apache.flink.api.common.functions.FlatMapFunction;
 import org.apache.flink.api.java.ExecutionEnvironment;
-import org.apache.flink.api.java.functions.KeySelector;
 import org.apache.flink.api.java.operators.AggregateOperator;
 import org.apache.flink.api.java.operators.DataSource;
 import org.apache.flink.api.java.operators.FlatMapOperator;
 import org.apache.flink.api.java.operators.UnsortedGrouping;
 import org.apache.flink.api.java.tuple.Tuple2;
-import org.apache.flink.streaming.api.datastream.DataStreamSource;
-import org.apache.flink.streaming.api.datastream.KeyedStream;
-import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
-import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.util.Collector;
-import org.junit.jupiter.api.Test;
 
-public class FlinkTest {
-
+public class WordCountBatchDemo {
     /**
      * DataSet API（批处理） 实现单词统计 这种实现方式已经过时
      * @throws Exception
      */
-    @Test
-    void dataSetTest() throws Exception {
+    public static void main(String[] args)throws Exception {
         ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();
 
         DataSource<String> dataSource = env.readTextFile("hello.txt");
@@ -51,6 +43,7 @@ public class FlinkTest {
          * (java,1)
          */
     }
+
 
 
 }

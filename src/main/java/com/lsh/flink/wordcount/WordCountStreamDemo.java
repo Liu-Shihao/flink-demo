@@ -11,7 +11,13 @@ import org.apache.flink.util.Collector;
 
 /**
  * BUG1:java.lang.NoClassDefFoundError: org/apache/flink/streaming/api/scala/StreamExecutionEnvironment
- * removing the <scope>provided</scope> which was present in the maven import.
+ * 1. removing the <scope>provided</scope> which was present in the maven import.
+ *
+ * 2. Select menu item "Run" => "Edit Configurations...",
+ * then in the "Build and run" section select "Modify options" => Java => Add dependencies with "Provided" scope to classpath in your local configuration.
+ *
+ * In this way you don't have to remove the <scope>provided</scope>.
+ *
  */
 public class WordCountStreamDemo {
 

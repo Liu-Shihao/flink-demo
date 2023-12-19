@@ -29,10 +29,9 @@ public class WordCountStreamDemo {
      */
     public static void main(String[] args) throws Exception{
 
-        //一般用于本地测试 访问：http://localhost:8081/
-        StreamExecutionEnvironment env = StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(new Configuration());
 
-//        StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+
+        StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
 
         DataStreamSource<String> stringDataStreamSource = env.readTextFile("hello.txt");
 

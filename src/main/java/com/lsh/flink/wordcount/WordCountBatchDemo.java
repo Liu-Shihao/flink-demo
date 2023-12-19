@@ -43,7 +43,4 @@ public class WordCountBatchDemo {
          * (java,1)
          */
     }
-
-
-
 }

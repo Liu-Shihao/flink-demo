@@ -3,6 +3,7 @@ package com.lsh.flink.wordcount;
 import org.apache.flink.api.common.functions.FlatMapFunction;
 import org.apache.flink.api.java.functions.KeySelector;
 import org.apache.flink.api.java.tuple.Tuple2;
+import org.apache.flink.configuration.Configuration;
 import org.apache.flink.streaming.api.datastream.DataStreamSource;
 import org.apache.flink.streaming.api.datastream.KeyedStream;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
@@ -27,7 +28,11 @@ public class WordCountStreamDemo {
      * @throws Exception
      */
     public static void main(String[] args) throws Exception{
-        StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+
+        //一般用于本地测试 访问：http://localhost:8081/
+        StreamExecutionEnvironment env = StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(new Configuration());
+
+//        StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
 
         DataStreamSource<String> stringDataStreamSource = env.readTextFile("hello.txt");
 
@@ -59,5 +64,6 @@ public class WordCountStreamDemo {
          * 7> (flink,1)
          * 2> (java,1)
          */
+        System.in.read();
     }
 }
